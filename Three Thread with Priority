@@ -1,0 +1,171 @@
+// Thread A
+
+package Session8;
+
+public class ThreadA implements Runnable {
+	
+	private String threadname;
+	
+	
+	 public ThreadA( String tname) {
+		// TODO Auto-generated constructor stub
+		
+		this.threadname = tname;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Thread execution: " + threadname + " - Priority: " + Thread.currentThread().getPriority());
+		
+		
+			for (int i=0; i<=5; i++){
+			
+			System.out.println(threadname + " Count: " + i);
+			
+				}
+		
+	}
+
+}
+
+// Thread B
+
+package Session8;
+
+public class ThreadB implements Runnable{
+	
+	
+	
+	private String threadname;
+	
+	
+	 public ThreadB( String tname) {
+		// TODO Auto-generated constructor stub
+		
+		this.threadname = tname;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Thread execution: " + threadname + " - Priority: " + Thread.currentThread().getPriority());
+		
+		
+			for (int i=0; i<=5; i++){
+			
+			System.out.println(threadname +" Count: " + i);
+			
+			//Thread.sleep(500);
+			}
+		
+	}
+
+}
+
+// Thread C
+
+package Session8;
+
+public class ThreadC extends Thread {
+	
+	
+	private String threadname;
+	
+	
+	 public ThreadC( String tname) {
+		// TODO Auto-generated constructor stub
+		
+		this.threadname = tname;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Thread execution: " + threadname + " - Priority: " + Thread.currentThread().getPriority());
+		
+		
+		for (int i=0; i<=5; i++){
+		
+		System.out.println(threadname +" Count: " + i);
+		
+		//Thread.sleep(500);
+		}
+		
+	}
+
+}
+
+// Main Class
+
+package Session8;
+
+public class ThreadExec {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		ThreadA ta = new ThreadA("Thread A");
+		ThreadB tb = new ThreadB("Thread B");
+		
+		
+		// Instance created for ThreadC which extends Thread class so no ref var created
+		ThreadC tc = new ThreadC("Thread C");
+		
+		
+		
+		// Thread instance created for two class which implements Runnable
+		
+		
+		
+		
+		Thread t = new Thread(ta);
+		Thread t1 = new Thread(tb);
+		
+		
+		// Priorities created
+		
+		t.setPriority(Thread.MIN_PRIORITY);
+		t1.setPriority(Thread.NORM_PRIORITY);
+		tc.setPriority(Thread.MAX_PRIORITY);
+		
+		
+		
+		
+		t.start();
+		t1.start();
+		tc.start();
+		
+
+	}
+
+}
+
+/* Output
+
+Thread execution: Thread A - Priority: 1
+Thread A Count: 0
+Thread execution: Thread C - Priority: 10
+Thread execution: Thread B - Priority: 5
+Thread C Count: 0
+Thread A Count: 1
+Thread A Count: 2
+Thread A Count: 3
+Thread A Count: 4
+Thread A Count: 5
+Thread C Count: 1
+Thread C Count: 2
+Thread C Count: 3
+Thread C Count: 4
+Thread B Count: 0
+Thread B Count: 1
+Thread B Count: 2
+Thread C Count: 5
+Thread B Count: 3
+Thread B Count: 4
+Thread B Count: 5
+
+*/
